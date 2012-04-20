@@ -1,0 +1,13 @@
+newmtl Material__1
+	Ns 25.000000
+	Ni 1.500000
+	d 1.000000
+	illum 2
+	map_Kd pear_skin.jpg
+
+newmtl Material__9
+	Ns 25.000000
+	Ni 1.500000
+	d 1.000000
+	illum 2
+	map_Kd pear_half.jpg

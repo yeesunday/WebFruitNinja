@@ -1,0 +1,27 @@
+newmtl Material__1
+	Ns 25.000000
+	Ni 1.500000
+	d 1.000000
+	illum 2
+	map_Kd kiwi_skin.jpg
+
+newmtl Material__9
+	Ns 25.000000
+	Ni 1.500000
+	d 1.000000
+	illum 2
+	map_Kd kiwi_bottom.jpg
+
+newmtl Material__2
+	Ns 25.000000
+	Ni 1.500000
+	d 1.000000
+	illum 2
+	map_Kd kiwi_top.jpg
+
+newmtl Kiwi_Top_Side01
+	Ns 53.808193
+	Ni 1.000000
+	d 1.000000
+	illum 2
+	map_Kd kiwi_top.jpg
