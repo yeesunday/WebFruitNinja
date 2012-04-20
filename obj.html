@@ -1,168 +1,172 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<title>three.js webgl - geometry - vertex colors</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				color: #808080;
-				font-family:Monospace;
-				font-size:13px;
-				text-align:center;
+  <head>
+    <title>three.js webgl - geometry - vertex colors</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+      body {
+        color: #808080;
+        font-family:Monospace;
+        font-size:13px;
+        text-align:center;
 
-				background-color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
+        background-color: #fff;
+        margin: 0px;
+        overflow: hidden;
+      }
 
-			#info {
-				position: absolute;
-				top: 0px; width: 100%;
-				padding: 5px;
-			}
+      #info {
+        position: absolute;
+        top: 0px; width: 100%;
+        padding: 5px;
+      }
 
-			a {
+      a {
 
-				color: #0080ff;
-			}
+        color: #0080ff;
+      }
 
-		</style>
-	</head>
-	<body>
+    </style>
+  </head>
+  <body>
 
-		<div id="container"></div>
-		<div id="info"><a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - vertex colors - webgl</div>
+    <div id="container"></div>
+    <div id="info"><a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a> - vertex colors - webgl</div>
 
-		<script src="js/Three.js"></script>
+    <script src="js/Three.js"></script>
 
-		<script src="js/Detector.js"></script>
-		<script src="js/Stats.js"></script>
+    <script src="js/Detector.js"></script>
+    <script src="js/Stats.js"></script>
 
-		<script>
+    <script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+      if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-			var container, stats;
+      var container, stats;
 
-			var camera, scene, renderer;
+      var camera, scene, renderer;
 
-			var mesh, group1, group2, group3, light;
-            var fruitObjs = [];
+      var mesh, group1, group2, group3, light;
+      var fruitObjs = [];
 
-			var mouseX = 0, mouseY = 0;
+      var mouseX = 0, mouseY = 0;
 
-			var windowHalfX = window.innerWidth / 2;
-			var windowHalfY = window.innerHeight / 2;
+      var windowHalfX = window.innerWidth / 2;
+      var windowHalfY = window.innerHeight / 2;
 
-            var zmesh;
+      var zmesh;
 
-			init();
-			animate();
+      init();
+      animate();
 
-			function init() {
+      function init() {
 
-				container = document.getElementById( 'container' );
+        container = document.getElementById( 'container' );
 
-				scene = new THREE.Scene();
+        scene = new THREE.Scene();
 
-				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000000 );
-				camera.position.z = 800;
-				scene.add( camera );
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000000 );
+        camera.position.z = 800;
+        scene.add( camera );
 
-                var light = new THREE.AmbientLight(0xcccccc);
-                scene.add(light);
+        var light = new THREE.AmbientLight(0xcccccc);
+        scene.add(light);
 
-				var directionallight = new THREE.DirectionalLight( 0xffffff , 0.3);
-				directionallight.position.set( 0, 0, 100 ).normalize();
-				scene.add( directionallight );
-
-
-
-				var texturePainting = THREE.ImageUtils.loadTexture( "images/background.jpg", THREE.UVMapping),
-					materialPainting = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texturePainting } );
-					var geometry = new THREE.PlaneGeometry( 1028, 728 );
-                mesh = new THREE.Mesh( geometry, materialPainting );
-                scene.add(mesh);
-
-                // load apple 
+        var directionallight = new THREE.DirectionalLight( 0xffffff , 0.3);
+        directionallight.position.set( 0, 0, 1 );
+        scene.add( directionallight );
 
 
-				var loader = new THREE.JSONLoader(),
-					callbackApple   = function( geometry ) { createScene( geometry,  -300, 50, 100, 1) },
-					callbackBanana  = function( geometry ) { createScene( geometry,  -200, 50, 100, 1 ) },
-					callbackKiwi    = function( geometry ) { createScene( geometry,  -100, 50, 100, 1 ) },
-					callbackOrange  = function( geometry ) { createScene( geometry,  0, 50, 100, 1 ) },
-					callbackPear    = function( geometry ) { createScene( geometry,  100, 50, 100, 1 ) },
-					callbackStrawberry  = function( geometry ) { createScene( geometry,  200, 50, 100, 55 ) },
-					callbackWatermelon  = function( geometry ) { createScene( geometry,  300, 50, 100, 1 ) };
-                
-                loader.load( "obj/apple/apple.js",  callbackApple);
-                loader.load( "obj/banana/banana.js",  callbackBanana);
-                loader.load( "obj/kiwi/kiwi.js",  callbackKiwi);
-                loader.load( "obj/orange/orange.js",  callbackOrange);
-                loader.load( "obj/pear/pear.js",  callbackPear);
-                loader.load( "obj/strawberry/strawbarry.js",  callbackStrawberry);
-                loader.load( "obj/watermelon/watermelon.js",  callbackWatermelon);
 
-			function createScene( geometry, x, y, z, b ) {
-				zmesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
-				zmesh.position.set( x, y, z );
-				zmesh.scale.set( b, b, b );
-				scene.add( zmesh );
-                fruitObjs.push(zmesh);
-			}
+        var texturePainting = THREE.ImageUtils.loadTexture( "images/Bamboo-Zen.jpg", THREE.UVMapping),
+            materialPainting = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texturePainting } );
+        var geometry = new THREE.PlaneGeometry( 1920, 1200 );
+        mesh = new THREE.Mesh( geometry, materialPainting );
+        scene.add(mesh);
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+        // load apple 
 
-				container.appendChild( renderer.domElement );
+        var loader = new THREE.JSONLoader(),
+            callbackApple   = function( geometry ) { createScene( geometry,  -300, 50, 100, 1) },
+            callbackBanana  = function( geometry ) { createScene( geometry,  -200, 50, 100, 1 ) },
+            callbackKiwi    = function( geometry ) { createScene( geometry,  -100, 50, 100, 1 ) },
+            callbackOrange  = function( geometry ) { createScene( geometry,  0, 50, 100, 1 ) },
+            callbackPear    = function( geometry ) { createScene( geometry,  100, 50, 100, 1 ) },
+            callbackStrawberry  = function( geometry ) { createScene( geometry,  200, 50, 100, 55 ) },
+            callbackWatermelon  = function( geometry ) { createScene( geometry,  300, 50, 100, 1 ) };
 
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				container.appendChild( stats.domElement );
+        loader.load( "obj/apple/apple.js",  callbackApple);
+        loader.load( "obj/banana/banana.js",  callbackBanana);
+        loader.load( "obj/kiwi/kiwi.js",  callbackKiwi);
+        loader.load( "obj/orange/orange.js",  callbackOrange);
+        loader.load( "obj/pear/pear.js",  callbackPear);
+        loader.load( "obj/strawberry/strawbarry.js",  callbackStrawberry);
+        loader.load( "obj/watermelon/watermelon.js",  callbackWatermelon);
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+        function createScene( geometry, x, y, z, b ) {
+          zmesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
+          zmesh.position.set( x, y, z );
+          zmesh.scale.set( b, b, b );
+          scene.add( zmesh );
+          fruitObjs.push(zmesh);
+        }
 
-			}
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setSize( window.innerWidth, window.innerHeight );
 
-			function onDocumentMouseMove( event ) {
+        container.appendChild( renderer.domElement );
 
-				mouseX = ( event.clientX - windowHalfX );
-				mouseY = ( event.clientY - windowHalfY );
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.top = '0px';
+        container.appendChild( stats.domElement );
 
-			}
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
-			//
+      }
 
-			function animate() {
+function onDocumentMouseMove( event ) {
 
-				requestAnimationFrame( animate );
+  mouseX = ( event.clientX - windowHalfX );
+  mouseY = ( event.clientY - windowHalfY );
 
-				render();
-				stats.update();
+}
+
+//
+
+function animate() {
+
+  requestAnimationFrame( animate );
+
+  render();
+  stats.update();
 
 
-			}
+}
 
-			function render() {
+function render() {
 
-				camera.position.x += ( mouseX - camera.position.x ) * 0.01;
-				camera.position.y += ( - mouseY - camera.position.y ) * 0.01;
-				camera.lookAt( scene.position );
+  camera.position.x += ( mouseX - camera.position.x ) * 0.01;
+  camera.position.y += ( - mouseY - camera.position.y ) * 0.01;
 
-				renderer.render( scene, camera );
+  var limit = 200;
+  camera.position.x = Math.max(Math.min(camera.position.x, limit), -limit);
+  camera.position.y = Math.max(Math.min(camera.position.y, limit), -limit);
 
-                if (fruitObjs[0]) 
-                {
-                  for (var i = 0; i < fruitObjs.length; i++ )
-                  fruitObjs[i].rotation.y += 0.05; 
-                }
+  camera.lookAt( scene.position );
 
-			}
+  renderer.render( scene, camera );
 
-		</script>
+  if (fruitObjs[0]) 
+  {
+    for (var i = 0; i < fruitObjs.length; i++ )
+      fruitObjs[i].rotation.y += 0.05; 
+  }
 
-	</body>
+}
+
+</script>
+
+  </body>
 </html>
