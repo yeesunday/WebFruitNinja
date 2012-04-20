@@ -1,21 +1,36 @@
-newmtl Material__9
-	Ns 25.000000
-	Ni 1.500000
-	d 1.000000
-	illum 2
+#  ==========================================================================
+#  Wavefront Material file
+#  Exported by Red-i Productions' "Riptide Pro"
+#  (a commercial plugin for Cinema 4D PC & Mac, R9.6 or later)
+#  
+#  Red-i Productions
+#  http://skinprops.com
+#  
+#  ==========================================================================
 
-	map_Kd pear_bottom.jpg
+newmtl Material__9
+Kd 0.345098 0.384314 0.423529
+Tf 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
+d 1.000000
+Ni 1.500000
+map_Kd pear_bottom.jpg
 
 newmtl Material__1
-	Ns 25.000000
-	Ni 1.500000
-	d 1.000000
-	illum 2
-	map_Kd pear_skin.jpg
+Kd 0.345098 0.384314 0.423529
+Tf 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
+d 1.000000
+Ni 1.500000
+map_Kd pear_skin.jpg
 
 newmtl Material__2
-	Ns 25.000000
-	Ni 1.500000
-	d 1.000000
-	illum 2
-	map_Kd pear_stem.jpg
+Kd 0.345098 0.384314 0.423529
+Tf 1.000000 1.000000 1.000000
+illum 2
+Ns 50.781250
+d 1.000000
+Ni 1.500000
+map_Kd pear_stem.jpg
