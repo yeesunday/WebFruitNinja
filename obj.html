@@ -87,15 +87,14 @@
 
         // load apple 
 
-
         var loader = new THREE.JSONLoader(),
             callbackApple   = function( geometry ) { createScene( geometry,  -300, 50, 100, 1) },
-            callbackBanana  = function( geometry ) { createScene( geometry,  -200, 50, 100, 55 ) },
-            callbackKiwi    = function( geometry ) { createScene( geometry,  -100, 50, 100, 55 ) },
-            callbackOrange  = function( geometry ) { createScene( geometry,  0, 50, 100, 55 ) },
-            callbackPear    = function( geometry ) { createScene( geometry,  100, 50, 100, 55 ) },
+            callbackBanana  = function( geometry ) { createScene( geometry,  -200, 50, 100, 1 ) },
+            callbackKiwi    = function( geometry ) { createScene( geometry,  -100, 50, 100, 1 ) },
+            callbackOrange  = function( geometry ) { createScene( geometry,  0, 50, 100, 1 ) },
+            callbackPear    = function( geometry ) { createScene( geometry,  100, 50, 100, 1 ) },
             callbackStrawberry  = function( geometry ) { createScene( geometry,  200, 50, 100, 55 ) },
-            callbackWatermelon  = function( geometry ) { createScene( geometry,  300, 50, 100, 55 ) };
+            callbackWatermelon  = function( geometry ) { createScene( geometry,  300, 50, 100, 1 ) };
 
         loader.load( "obj/apple/apple.js",  callbackApple);
         loader.load( "obj/banana/banana.js",  callbackBanana);
