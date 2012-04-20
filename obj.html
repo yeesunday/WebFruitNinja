@@ -151,6 +151,10 @@ function render() {
   camera.position.x += ( mouseX - camera.position.x ) * 0.01;
   camera.position.y += ( - mouseY - camera.position.y ) * 0.01;
 
+  var limit = 200;
+  camera.position.x = Math.max(Math.min(camera.position.x, limit), -limit);
+  camera.position.y = Math.max(Math.min(camera.position.y, limit), -limit);
+
   camera.lookAt( scene.position );
 
   renderer.render( scene, camera );
