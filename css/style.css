@@ -1,0 +1,14 @@
+body {
+  color: #808080;
+  font-family:Monospace;
+  font-size:13px;
+  text-align:center;
+
+  background-color: #000;
+  margin: 0px;
+  overflow: hidden;
+}
+
+a {
+  color: #0080ff;
+}
