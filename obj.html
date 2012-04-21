@@ -23,10 +23,8 @@
       }
 
       a {
-
         color: #0080ff;
       }
-
     </style>
   </head>
   <body>
@@ -50,7 +48,7 @@
       var mesh, group1, group2, group3, light;
       var fruitObjs = [];
 
-      var mouseX = 0, mouseY = 0;
+      var mouseX = 0, mouseY = 0, INTERSECTED;
 
       var windowHalfX = window.innerWidth / 2;
       var windowHalfY = window.innerHeight / 2;
@@ -67,7 +65,7 @@
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000000 );
-        camera.position.z = 1200;
+        camera.position.z = 1000;
         scene.add( camera );
 
         var light = new THREE.AmbientLight(0xcccccc);
@@ -79,7 +77,7 @@
 
 
 
-        var texturePainting = THREE.ImageUtils.loadTexture( "images/fruit_ninja_1.png", THREE.UVMapping),
+        var texturePainting = THREE.ImageUtils.loadTexture( "images/Bamboo-Zen.jpg", THREE.UVMapping),
             materialPainting = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texturePainting } );
         var geometry = new THREE.PlaneGeometry( 1920, 1200 );
         mesh = new THREE.Mesh( geometry, materialPainting );
@@ -117,14 +115,43 @@
 
         container.appendChild( renderer.domElement );
 
+        projector = new THREE.Projector();
+
         stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
         container.appendChild( stats.domElement );
 
         document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 
       }
+
+function onDocumentMouseDown( event ) {
+  event.preventDefault();
+  console.log('down!!');
+
+  var vector = new THREE.Vector3( mouseX, mouseY, 1 );
+  projector.unprojectVector( vector, camera );
+
+  var ray = new THREE.Ray( camera.position, vector.subSelf( camera.position ).normalize() );
+
+  var intersects = ray.intersectObjects(fruitObjs);
+
+    console.log(intersects);
+  if ( intersects.length > 0 ) {
+    console.log(intersects);
+  }
+
+  /*
+  // Parse all the faces
+  for ( var i in intersects ) {
+
+  intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
+
+  }
+   */
+}
 
 function onDocumentMouseMove( event ) {
 
